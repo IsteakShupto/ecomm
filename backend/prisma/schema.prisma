@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  hashedPassword String
+  isAdmin        Boolean   @default(false)
+  created_at     DateTime  @default(now())
+  Review         Review[]
+  Product        Product[]
+  Order          Order[]
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  name       String
+  rating     Int
+  comment    String
+  created_at DateTime @default(now())
+  user       User     @relation(fields: [user_id], references: [id])
+  user_id    String
+  product    Product  @relation(fields: [product_id], references: [id])
+  product_id String
+
+  @@unique([id, product_id])
+}
+
+model Product {
+  id           String      @id @default(cuid())
+  name         String
+  image        String
+  brand        String
+  category     String
+  rating       Int
+  numReviews   Int
+  price        Float
+  countInStock Int
+  created_at   DateTime    @default(now())
+  user         User        @relation(fields: [user_id], references: [id])
+  user_id      String
+  Review       Review[]
+  OrderItem    OrderItem[]
+}
+
+model ShippingAddress {
+  id         String  @id @default(cuid())
+  address    String
+  city       String
+  postalCode String
+  country    String
+  Order      Order[]
+}
+
+model OrderItem {
+  id         String  @id @default(cuid())
+  qty        Int
+  image      String
+  price      Int
+  product    Product @relation(fields: [product_id], references: [id])
+  product_id String
+  Order      Order[]
+}
+
+model Order {
+  id                String          @id @default(cuid())
+  orderItem         OrderItem       @relation(fields: [orderItemId], references: [id])
+  orderItemId       String
+  shippingAddress   ShippingAddress @relation(fields: [shippingAddressId], references: [id])
+  shippingAddressId String
+  paymentMethod     String
+  paymentResult     String
+  itemsPrice        Float           @default(0.0)
+  taxPrice          Float           @default(0.0)
+  shippingPrice     Float           @default(0.0)
+  totalPrice        Float           @default(0.0)
+  isPaid            Boolean         @default(false)
+  paid_at           DateTime
+  isDelivered       Boolean         @default(false)
+  deliveredAt       DateTime
+  created_at        DateTime        @default(now())
+  user              User            @relation(fields: [user_id], references: [id])
+  user_id           String
+}

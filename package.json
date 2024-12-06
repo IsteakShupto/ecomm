@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.0",
+    "concurrently": "^9.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7",
+    "zod": "^3.23.8"
+  },
+  "name": "ecommmasterapp",
+  "version": "1.0.0",
+  "description": "1. Step 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "node backend/dist/index.js",
+    "server": "nodemon backend/dist/index.js",
+    "client": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
