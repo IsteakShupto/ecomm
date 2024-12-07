@@ -40,7 +40,7 @@
 
    - Create these schemas: user, product, reviews, order
 
-   - Create get bulk products and also get individual product routes and make them functional = do proper error handling (do asyncHandler and errorMiddleware for error checking)
+   - Create get bulk products and also get individual product routes and make them functional in both client and server side = do proper error handling (do asyncHandler and errorMiddleware for error checking)
 
    - Create separate route for getting bulk product and getting a single product
 

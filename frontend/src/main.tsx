@@ -6,6 +6,7 @@ import App from "./App.tsx";
 import Signin from "./pages/Signin.tsx";
 import Home from "./pages/Home.tsx";
 import Cart from "./components/Cart.tsx";
+import SingleProduct from "./pages/SingleProduct.tsx";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,10 @@ const router = createBrowserRouter([
         path: "cart",
         element: <Cart />,
       },
-
+      {
+        path: "products/:id",
+        element: <SingleProduct />,
+      },
       {
         path: "signin",
         element: <Signin />,

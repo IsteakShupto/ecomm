@@ -35,6 +35,7 @@ model Review {
 model Product {
   id           String      @id @default(cuid())
   name         String
+  description  String
   image        String
   brand        String
   category     String
